@@ -1,6 +1,7 @@
 import './App.css'
-import { Container, Typography, Stack } from '@mui/material'
-import { JavaScriptLogo } from './JavaScriptLogo'
+import { Container } from '@mui/material'
+import Signature from './Signature'
+import Navbar from './Navbar'
 import Start from './Start'
 import { useQuestionsStore } from './store/questions'
 import Game from './Game'
@@ -9,23 +10,28 @@ function App() {
   const questions = useQuestionsStore((state) => state.questions)
 
   return (
-    <main>
-      <Container maxWidth="sm">
-        <Stack
-          direction="row"
-          gap={2}
-          alignItems="center"
-          justifyContent="center"
-        >
-          <JavaScriptLogo />
-          <Typography variant="h2" component="h1" sx={{ py: 4 }}>
-            JavaScript Quiz
-          </Typography>
-        </Stack>
-
+    <main style={{
+      width: '100%', 
+      minHeight: '100vh',
+      display: 'flex',
+      flexDirection: 'column'
+    }}>
+      <Navbar />
+      <Container 
+        maxWidth="sm" 
+        sx={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flex: 1,
+          py: 4
+        }}
+      >
         {questions.length === 0 && <Start />}
         {questions.length > 0 && <Game />}
       </Container>
+      <Signature />
     </main>
   )
 }
